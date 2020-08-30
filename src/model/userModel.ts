@@ -55,16 +55,6 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-userSchema.methods.toJSON = function () {
-    const user = this;
-    const userObject = user.toObject();
-
-    delete userObject.password;
-    delete userObject.tokens;
-
-    return userObject;
-}
-
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
 
@@ -75,6 +65,16 @@ userSchema.methods.generateAuthToken = async function () {
     return token;
 }
 
-const User = mongoose.model<IUser>("User", userSchema);
+userSchema.methods.abstractUser = async function() {
 
-export default User;
+    const user = this.toObject();
+
+    delete user.password;
+    delete user.tokens;
+
+    return user;
+}
+
+const UserModel = mongoose.model<IUser>("User", userSchema);
+
+export default UserModel;

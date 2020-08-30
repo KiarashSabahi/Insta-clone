@@ -24,6 +24,7 @@ app.use(body_parser_1.json());
 app.use(cookie_parser_1.default());
 app.use("/user", user_1.default);
 app.use("/", (req, res) => {
+    console.log("bad place");
     res.sendFile(path_1.default.join(__dirname, "../", "views", "index.html"));
 });
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {

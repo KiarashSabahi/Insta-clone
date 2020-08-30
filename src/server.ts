@@ -18,6 +18,7 @@ app.use("/user", userRouter);
 
 
 app.use("/", (req, res) => {
+    console.log("bad place")
     res.sendFile(path.join(__dirname, "../","views", "index.html"))
 })
 
