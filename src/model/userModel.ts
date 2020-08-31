@@ -5,6 +5,10 @@ import bcrypt from "bcrypt";
 
 import IUser from "../interfaces/userInterface";
 
+// @ts-ignore
+const Jwt = process.env.Jwt.toString();
+
+
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
@@ -58,7 +62,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
 
-    const token = jwt.sign({_id: user._id.toString()}, "user", {expiresIn: "2 days"});
+    const token = jwt.sign({_id: user._id.toString()}, Jwt, {expiresIn: "2 days"});
     user.tokens.push({ token });
 
     await user.save();

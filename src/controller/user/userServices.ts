@@ -1,6 +1,5 @@
 import UserModel from "../../model/userModel";
 import bcrypt from "bcrypt";
-import userInterface from "../../interfaces/userInterface";
 
 
 class UserServices {
@@ -37,6 +36,13 @@ class UserServices {
         const token = await user.generateAuthToken();
         return {user: await user.abstractUser() ,token};
     }
+
+    find = async (method: string, input: object) => {
+        // @ts-ignore
+        const user = await UserModel[method](input);
+        return await user.abstractUser();
+    }
+
 }
 
 export default new UserServices();
