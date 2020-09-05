@@ -1,0 +1,191 @@
+* {
+    overflow: hidden;
+    background: #FAFAFA;
+}
+
+@font-face {
+    font-family: "Billabong";
+    src: url('../../fonts/Billabong.ttf');
+}
+
+.main {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.fields {
+    width: 50%;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldsMain {
+    display: table;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+}
+
+#signUpField {
+    background: #FFFFFF;
+    border-style: solid;
+    border-width: 0.1ex;
+    border-color: lightgray;
+    border-radius: 3px;
+    padding: 25px 10px 10px 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    align-content: center;
+
+}
+
+.formData {
+    padding: .8rem;
+    margin-bottom: .5rem;
+    border-style: solid;
+    border-width: 0.1ex;
+    border-color: lightgray;
+    border-radius: 3px;
+    width: 85%;
+}
+
+.signUpButton {
+    margin: 1rem 0 1.5rem;
+    height: 3rem;
+    background-color: #3897f0;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: bold;
+    width: 85%;
+    border: none;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.terms {
+    font-family: "Segoe UI", serif;
+    font-size: 12px;
+    width: 80%;
+    align-content: center;
+    margin: auto;
+}
+
+.has-separator {
+    font-size: 15px;
+    color: #999999;
+    text-transform: uppercase;
+    position: relative;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.facebook-login {
+    font-size: 15px;
+    font-weight: bold;
+    color: #385185;
+    margin-bottom: 2.5rem;
+    vertical-align: center;
+}
+
+.facebook-login i {
+    font-size: 2rem;
+    margin-right: .7rem;
+
+}
+
+.passwordReset{
+    font-size: 12px;
+    color: #003569;
+    margin-bottom: 2.5rem;
+}
+
+.sign-up {
+    background: #FFFFFF;
+    padding: 10px;
+    border-style: solid;
+    border-width: 0.1ex;
+    border-radius: 1px;
+    border-color: lightgray;
+}
+
+.sign-up a {
+    color: #3897f0;
+}
+
+.get-the-app
+{
+    font-size: 15px;
+    text-align: center;
+}
+
+.get-the-app span
+{
+    display: block;
+    margin: 1.2rem 0;
+    color: #262626;
+}
+
+.badge
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.badge img
+{
+    max-width: 8rem;
+    cursor: pointer;
+}
+
+.badge img:first-child
+{
+    margin-right: 1rem;
+}
+
+.bottom {
+    position: static;
+    bottom: 0;
+    height: 10vh;
+    width: 100vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottomCredit {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    position: relative;
+    text-align: center;
+    margin-left: 150px;
+    font-weight: 600;
+    font-size: 12px;
+    float: right;
+}
+
+.bottomButtons {
+    float: left;
+}
+
+.bottomButton {
+    color: rgba(var(--fe0,0,55,107),1);
+    position: relative;
+    margin-left: 30px;
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+

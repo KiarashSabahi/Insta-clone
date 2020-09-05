@@ -7,13 +7,13 @@ const userRouter = Router();
 
 
 //user Sign up page
-userRouter.get("/");
+// userRouter.get("/signUp");
 
 //user Sign up
 userRouter.post("/signUp", userController.signUp);
 
 //user Log in page
-userRouter.get("/");
+// userRouter.get("/login");
 
 //user Log in
 userRouter.post("/login", userController.logIn);

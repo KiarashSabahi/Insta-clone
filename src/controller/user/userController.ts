@@ -28,7 +28,6 @@ class UserClass {
 
     logIn: RequestHandler = async (req, res) => {
         try {
-
             const userInput = req.body.userInput;
             const password = req.body.password;
 
@@ -47,7 +46,7 @@ class UserClass {
             res.cookie('Authorization',
                 'Bearer ' + response.token, {
                     expires: new Date(Date.now() + 5 * 24 * 3600000)
-                }).status(200).redirect("/");
+                }).status(200).send(response);
         } catch (e) {
             console.log({place: "userController, login", e})
             res.status(400).send(e);
