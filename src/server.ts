@@ -1,26 +1,27 @@
 import express from "express";
 import {json} from "body-parser";
 import cookieParser from "cookie-parser";
-import path from "path"
-
+import multer from "multer";
 
 import "./db/DBConnection";
 import userRouter from "./routes/user";
+import postRouter from "./routes/post";
 
 
 const app = express();
 const port = process.env.PORT;
 
+// app.set("view engine", "");
+app.set("views", "../views");
 
 app.use(json());
 app.use(cookieParser());
+app.use(multer({dest: "../images"}).single("image"));
 app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 
-app.use("/", (req, res) => {
-    console.log("bad place")
-    res.sendFile(path.join(__dirname, "../","views", "index.html"))
-})
+
 
 
 

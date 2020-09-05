@@ -43,6 +43,17 @@ class UserServices {
         return await user.abstractUser();
     }
 
+    deleteToken = async (id: string, authToken: string) => {
+        const user = await UserModel.findById(id);
+        if (user == null) {
+            return
+        }
+        // @ts-ignore
+        const Token = user.tokens.indexOf(({token}: {token: string}) => authToken === token);
+        user.tokens.splice(Token, 1);
+        await user.save();
+        return;
+    }
 }
 
 export default new UserServices();

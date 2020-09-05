@@ -53,6 +53,24 @@ class UserClass {
             res.status(400).send(e);
         }
     }
+
+    logOut: RequestHandler = async (req, res) => {
+        try {
+            // @ts-ignore
+            await UserServices.deleteToken(req.user._id, req.token);
+            res.status(200).send({});
+        } catch (e) {
+            console.log({place: "userController, logout", e})
+            res.status(500).send({error: e});
+        }
+    }
+
+    viewProfile: RequestHandler = async (req, res) => {
+        //@ts-ignore
+        res.status(200).send(req.user);
+    }
+
+
 }
 
 export default new UserClass();

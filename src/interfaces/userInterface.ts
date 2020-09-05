@@ -6,6 +6,7 @@ export default interface IUser extends mongoose.Document {
     nickName: string;
     email: string;
     password: string;
+    posts: any;
     tokens: string[];
 
     generateAuthToken(): string;

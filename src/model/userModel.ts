@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    posts: [{
+        type: Object
+    }],
     tokens: [{
         token: {
             type: String,
@@ -75,6 +78,7 @@ userSchema.methods.abstractUser = async function() {
 
     delete user.password;
     delete user.tokens;
+    delete user.posts;
 
     return user;
 }

@@ -17,8 +17,6 @@ export const userAuth: RequestHandler = async (req, res, next) => {
 
         // @ts-ignore
         const user = await UserServices.find('findOne', { _id: decoded._id, 'tokens.token': token });
-        console.log(user);
-        console.log("_______________")
         // @ts-ignore
         req.token = token;
         // @ts-ignore

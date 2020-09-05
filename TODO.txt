@@ -1,0 +1,3 @@
+[ ] forget password
+[ ] email confirm for sign in
+[ ]
