@@ -5,6 +5,10 @@ import UserServices from "./userServices";
 
 class UserClass {
 
+    signUpPage: RequestHandler = async (req, res) => {
+        res.status(200).render("./user/signup");
+    }
+
     signUp: RequestHandler = async (req, res) => {
         
         try {
@@ -12,7 +16,7 @@ class UserClass {
             const user = req.body.user;
 
             if (!validator.isEmail(user.email)){
-                return res.status(400).send({Error: "Invalid Email address"});
+                return res.status(400).send({error: "Invalid Email address"});
             }
 
             const response = await UserServices.addUser(user);
@@ -22,8 +26,12 @@ class UserClass {
                 }).status(201).redirect("/");
         } catch (e) {
             console.log({place: "userController, signUp", e})
-            res.status(500).send(e);
+            res.status(500).send({error: e});
         }
+    }
+
+    logInPage: RequestHandler = async (req, res) => {
+        res.status(200).render("./user/login");
     }
 
     logIn: RequestHandler = async (req, res) => {
@@ -68,6 +76,7 @@ class UserClass {
         //@ts-ignore
         res.status(200).send(req.user);
     }
+
 
 
 }

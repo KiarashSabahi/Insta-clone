@@ -24,6 +24,6 @@ export const userAuth: RequestHandler = async (req, res, next) => {
         next();
 
     } catch (error) {
-        return res.status(401).send(error);
+        return res.status(401).redirect("/user/login");
     }
 }

@@ -6,29 +6,38 @@
     <title>Insta-clone</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="../../public/css/user/signup.css">
+    <link rel="stylesheet" href="/css/user/login.css">
 </head>
 <body>
     <div class="main">
+        <div class="picture">
+            <img src="/images/loginPhones.png" id="phonePicture" alt="phone image">
+        </div>
         <div class="fields">
             <div class="fieldsMain">
-                <div id="signUpField">
+                <div id="loginField">
                     <img src="https://i.imgur.com/zqpwkLQ.png"  alt="instagram logo"/>
                     <div style="display: block">
-                        <input type="text" placeholder="Email" class="formData">
-                        <input type="text" placeholder="Nick name" class="formData">
-                        <input type="text" placeholder="Username" class="formData">
-                        <input type="text" placeholder="Password" class="formData">
+                        <input type="text" placeholder="Username or email" class="formData" id="loginInput">
+                        <input type="text" placeholder="Password" class="formData" id="loginPassword">
                     </div>
                     <div>
-                        <button class="signUpButton" type="submit">Sign up</button>
+                        <button class="loginButton" type="submit" id="loginButton">Log in</button>
                     </div>
-                    <div class= "terms" style="margin-top: 5px">
-                        By signing up, you agree to our Terms , Data Policy and Cookies Policy .
+                    <div>
+                        <span class="has-separator">Or</span>
+                    </div>
+                    <div style="margin-top: 5px">
+                        <a href="#" class="facebook-login">
+                            <i class="fab fa-facebook"></i> Log in with Facebook
+                        </a>
+                    </div>
+                    <div style="margin-top: 5px">
+                        <a class="passwordReset" href="#" id="resetPasswordButton">Forgot password?</a>
                     </div>
                 </div>
                 <div class="sign-up">
-                    Have an account? &nbsp;<a href="#"> Log in </a>
+                    Don't have an account? &nbsp;<a href="#" id="signUpButton"> Sign up</a>
                 </div>
                 <div>
                     <div class="get-the-app">
@@ -92,5 +101,6 @@
             © 2020 Insta-clone from Kiarash
         </div>
     </div>
+    <script src="/js/user/login.js"></script>
 </body>
 </html>
