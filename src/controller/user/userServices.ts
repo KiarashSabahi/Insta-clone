@@ -49,10 +49,19 @@ class UserServices {
             return
         }
         // @ts-ignore
-        const Token = user.tokens.indexOf(({token}: {token: string}) => authToken === token);
-        user.tokens.splice(Token, 1);
+        user.tokens = user.tokens.filter(({token}: {token: string}) => authToken !== token);
         await user.save();
         return;
+    }
+
+    addPost = async (userId: Object, postId: Object) => {
+        const user = await UserModel.findById(userId);
+        if (user == null) {
+            return
+        }
+        // @ts-ignore
+        user.posts.push(postId);
+        await user.save();
     }
 }
 

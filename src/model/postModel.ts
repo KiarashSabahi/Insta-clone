@@ -4,15 +4,15 @@ import IUser from "../interfaces/userInterface";
 
 
 const postSchema = new mongoose.Schema({
-    userName: {
-        type: String,
+    userId: {
+        type: Object,
         required: true,
     },
     image: {
         type: String,
         required: true
     },
-    description: {
+    caption: {
         type: String,
         default: ""
     },

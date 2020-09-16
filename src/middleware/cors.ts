@@ -1,4 +1,6 @@
 import {RequestHandler} from "express";
+import cors from "cors"
+
 
 export const setCORS: RequestHandler = (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
