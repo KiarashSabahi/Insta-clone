@@ -63,6 +63,23 @@ class UserServices {
         user.posts.push(postId);
         await user.save();
     }
+
+    deletePost = async (userId: string, postId: string) => {
+        const user = await UserModel.findById(userId);
+
+        if (user == null) {
+           throw new Error("User not found");
+        }
+
+        const index = user.posts.indexOf(postId);
+        if (index > -1) {
+            await user.posts.splice(index, 1);
+            await user.save();
+            console.log("done in userService")
+        } else {
+            throw new Error("User doesnt have the specified post");
+        }
+    }
 }
 
 export default new UserServices();

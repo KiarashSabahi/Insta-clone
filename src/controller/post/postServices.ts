@@ -13,6 +13,18 @@ class PostServices {
         await userServices.addPost(input.userId, post._id);
         return post
     }
+
+    find = async (method: string, input: object) => {
+        // @ts-ignore
+        return await PostModel[method](input);
+    }
+
+    deletePost = async (postId: string, userId: string) => {
+        const post = await PostModel.findOneAndDelete({_id: postId});
+        return post;
+    }
+
+
 }
 
 export default new PostServices();

@@ -37,6 +37,12 @@ const userSchema = new mongoose.Schema({
     posts: [{
         type: Object
     }],
+    followings: [{
+        type: Object
+    }],
+    followers: [{
+        type: Object
+    }],
     tokens: [{
         token: {
             type: String,

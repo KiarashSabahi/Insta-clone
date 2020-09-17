@@ -12,4 +12,7 @@ postRouter.get("/createPost", postController.createPostPage);
 //Upload post Image
 postRouter.post("/createPost", multer, postController.createPost);
 
+//Delete post
+postRouter.delete("/deletePost", postController.deletePost);
+
 export default postRouter;
