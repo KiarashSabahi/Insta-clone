@@ -1,7 +1,6 @@
 import express from "express";
 import {json} from "body-parser";
 import cookieParser from "cookie-parser";
-import multer from "multer"
 import path from "path";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -35,7 +34,7 @@ app.use("/post", userAuth, postRouter);
 
 
 app.get("/", userAuth, (req, res) => {
-    res.status(200).render("feed.ejs");
+    res.status(200).render("home.ejs");
 });
 
 app.use(pageNotFound);

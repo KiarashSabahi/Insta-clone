@@ -38,7 +38,7 @@ app.use("/images", express_1.default.static(path_1.default.join(__dirname, "../i
 app.use("/user", user_1.default);
 app.use("/post", userAuth_1.userAuth, post_1.default);
 app.get("/", userAuth_1.userAuth, (req, res) => {
-    res.status(200).render("feed.ejs");
+    res.status(200).render("home.ejs");
 });
 app.use(_404_1.pageNotFound);
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
