@@ -19,13 +19,21 @@ class UserClass {
                 return res.status(400).send({error: "Invalid Email address"});
             }
 
-            const response = await UserServices.addUser(user);
+            let response;
+
+            try {
+                response = await UserServices.addUser(user);
+            } catch (e) {
+                return res.status(400).send({error: "Duplicated Email address"});
+            }
+
             res.cookie('Authorization',
                 'Bearer ' + response.token, {
                     expires: new Date(Date.now() + 5 * 24 * 3600000)
-                }).status(201).redirect("/");
+                }).status(201).end();
         } catch (e) {
-            console.log({place: "userController, signUp", e})
+            console.log(e.errors)
+            // console.log({place: "userController, signUp", e})
             res.status(500).send({error: e});
         }
     }
@@ -45,19 +53,24 @@ class UserClass {
                 return res.status(400).send({error: "Invalid Input"});
             }
 
-            if (validator.isEmail(userInput)){
-                response = await UserServices.login({userInput, password, loginMethod: "email"});
-            } else {
-                response = await UserServices.login({userInput, password, loginMethod: "userName"})
+            try {
+                if (validator.isEmail(userInput)){
+                    response = await UserServices.login({userInput, password, loginMethod: "email"});
+                } else {
+                    response = await UserServices.login({userInput, password, loginMethod: "userName"})
+                }
+            } catch (e) {
+                return res.status(400).send(e);
             }
 
             res.cookie('Authorization',
+            // @ts-ignore
                 'Bearer ' + response.token, {
                     expires: new Date(Date.now() + 5 * 24 * 3600000)
                 }).status(200).send(response);
         } catch (e) {
             console.log({place: "userController, login", e})
-            res.status(400).send(e);
+            res.status(500).send(e);
         }
     }
 
@@ -76,9 +89,6 @@ class UserClass {
         //@ts-ignore
         res.status(200).send(req.user);
     }
-
-
-
 }
 
 export default new UserClass();

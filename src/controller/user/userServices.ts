@@ -40,6 +40,9 @@ class UserServices {
     find = async (method: string, input: object) => {
         // @ts-ignore
         const user = await UserModel[method](input);
+        if (!user) {
+            return ;
+        }
         return await user.abstractUser();
     }
 
@@ -79,6 +82,10 @@ class UserServices {
         } else {
             throw new Error("User doesnt have the specified post");
         }
+    }
+
+    clearCollection = async () => {
+        await UserModel.deleteMany({});
     }
 }
 
