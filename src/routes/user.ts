@@ -19,16 +19,13 @@ userRouter.get("/login", userController.logInPage);
 userRouter.post("/login", userController.logIn);
 
 //Token checker
-userRouter.get("/auth", userAuth, userController.viewProfile);
+userRouter.get("/auth", userAuth, userController.me);
 
 //user Log out
 userRouter.delete("/logout", userAuth, userController.logOut);
 
 //user Profile page
-userRouter.get("/me")
-
-//user Profile
-userRouter.get("/profile", userAuth, userController.viewProfile);
+// userRouter.get("/me")
 
 //edit Profile Page
 // userRouter.get("/")
@@ -38,6 +35,23 @@ userRouter.get("/profile", userAuth, userController.viewProfile);
 
 //delete user
 // userRouter.delete("/");
+
+//search for user
+userRouter.get("/search", userController.search);
+
+//follow
+userRouter.post("/follow", userAuth, userController.follow);
+
+//unfollow
+userRouter.post("/unfollow", userAuth, userController.unfollow);
+
+
+
+
+
+
+//view user profile
+userRouter.get("/:username", userController.viewProfile);
 
 
 export default userRouter;

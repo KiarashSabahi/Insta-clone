@@ -8,6 +8,8 @@ export default interface IUser extends mongoose.Document {
     password: string;
     posts: any;
     tokens: string[];
+    followers: any[];
+    followings: any[];
 
     generateAuthToken(): string;
     abstractUser(): object;

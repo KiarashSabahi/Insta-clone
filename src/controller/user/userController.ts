@@ -1,6 +1,7 @@
-import {RequestHandler, response} from 'express';
+import {RequestHandler, response, urlencoded} from 'express';
 import validator from "validator";
 import UserServices from "./userServices";
+import userServices from "./userServices";
 
 
 class UserClass {
@@ -32,9 +33,8 @@ class UserClass {
                     expires: new Date(Date.now() + 5 * 24 * 3600000)
                 }).status(201).end();
         } catch (e) {
-            console.log(e.errors)
-            // console.log({place: "userController, signUp", e})
-            res.status(500).send({error: e});
+            console.log({place: "userController, signUp", e})
+            res.status(500).send({e});
         }
     }
 
@@ -85,9 +85,62 @@ class UserClass {
         }
     }
 
-    viewProfile: RequestHandler = async (req, res) => {
+    me: RequestHandler = async (req, res) => {
         //@ts-ignore
         res.status(200).send(req.user);
+    }
+
+    search: RequestHandler = async (req, res) => {
+        try {
+            const userName = req.query.username;
+            const user = await userServices.find("findOne", {userName});
+            res.send({user})
+        } catch (e) {
+            console.log({place: "userController, search", e})
+            res.status(500).send(e);
+        }
+    }
+
+    viewProfile: RequestHandler = async (req, res, next) => {
+        const userName = req.params.username;
+        if (!userName) {
+            return next();
+        }
+
+        try {
+            const user = await userServices.find("findOne", {userName});
+
+            if (!user) {
+                return res.status(404).render("404", {pageTitle: "User Not Found", requestedURL: userName});
+            }
+
+            res.status(200).render("./user/profile", {user})
+        } catch (e) {
+            console.log({place: "userController, viewProfile", e})
+            res.status(500).send(e.message);
+        }
+    }
+
+    follow: RequestHandler = async (req, res) => {
+        try {
+            // @ts-ignore
+            await UserServices.follow(req.user.userName, req.body.userId);
+            res.status(200).end();
+        } catch (e) {
+            console.log({place: "userController, follow", e})
+            res.status(500).send(e);
+        }
+    }
+
+    unfollow: RequestHandler = async (req, res) => {
+        try {
+            // @ts-ignore
+            await UserServices.unfollow(req.user.userName, req.body.userId);
+            res.status(200).end();
+        } catch (e) {
+            console.log({place: "userController, unfollow", e})
+            res.status(500).send(e.message);
+        }
     }
 }
 

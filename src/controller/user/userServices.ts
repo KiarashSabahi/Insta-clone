@@ -1,9 +1,9 @@
 import UserModel from "../../model/userModel";
 import bcrypt from "bcrypt";
+import IUser from "../../interfaces/userInterface";
 
 
 class UserServices {
-
     addUser = async (input: {
         userName: string,
         password: string,
@@ -86,6 +86,54 @@ class UserServices {
 
     clearCollection = async () => {
         await UserModel.deleteMany({});
+    }
+
+    follow = async (userUserName: string, targetUsername: string) => {
+        const user: any = await UserModel.findOne({userName: userUserName});
+        const targetUser: any = await UserModel.findOne({userName: targetUsername});
+
+        if (user == null || targetUser == null) {
+            throw new Error("Couldnt find the user")
+        }
+
+        if (user.followings.includes(targetUser._id) || targetUser.followers.includes(user._id)) {
+            return
+        }
+
+        user.followings.push(targetUser._id);
+        targetUser.followers.push(user._id);
+
+
+        await user.save();
+        await targetUser.save();
+    }
+
+    unfollow = async (userUserName: string, targetUsername: string) => {
+        const user: any = await UserModel.findOne({userName: userUserName});
+        const targetUser: any = await UserModel.findOne({userName: targetUsername});
+
+        if (user == null || targetUser == null) {
+            throw new Error("Couldnt find the user")
+        }
+
+        if (!user.followings.includes(targetUser._id) || !targetUser.followers.includes(user._id)) {
+            return;
+        }
+
+
+        const userIndex = user.followings.indexOf(targetUser._id);
+        const targetIndex = targetUser.followers.indexOf(user._id);
+
+        if (userIndex > -1 && targetIndex > -1) {
+
+            user.followings.splice(userIndex, 1);
+            targetUser.followers.splice(targetIndex, 1);
+
+            await user.save();
+            await targetUser.save();
+        } else {
+            throw new Error("");
+        }
     }
 }
 
