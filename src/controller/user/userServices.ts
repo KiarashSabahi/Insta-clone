@@ -1,6 +1,7 @@
 import UserModel from "../../model/userModel";
 import bcrypt from "bcrypt";
 import IUser from "../../interfaces/userInterface";
+import getTimerCount = jest.getTimerCount;
 
 
 class UserServices {
@@ -109,6 +110,7 @@ class UserServices {
     }
 
     unfollow = async (userUserName: string, targetUsername: string) => {
+
         const user: any = await UserModel.findOne({userName: userUserName});
         const targetUser: any = await UserModel.findOne({userName: targetUsername});
 
@@ -135,6 +137,32 @@ class UserServices {
             throw new Error("");
         }
     }
+
+    feed = async (skip: number | 0, limit?: number | 10) => {
+        let resPosts: any = [];
+
+        const user: any = await UserModel.findOne({ userName: "kiarash" })
+            .populate({
+                path: "followings",
+                populate: {
+                    path: "posts",
+                    options: {
+                        skip,
+                        limit,
+                        sort: {
+                            createdAt: -1
+                        }
+                    }
+                }
+            });
+
+        user.followings.forEach((following: any) => {
+            resPosts = resPosts.concat(following.posts);
+        })
+
+        return resPosts;
+    }
 }
+
 
 export default new UserServices();

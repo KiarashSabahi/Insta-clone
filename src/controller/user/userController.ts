@@ -2,6 +2,7 @@ import {RequestHandler, response, urlencoded} from 'express';
 import validator from "validator";
 import UserServices from "./userServices";
 import userServices from "./userServices";
+import postServices from "../post/postServices";
 
 
 class UserClass {
@@ -25,6 +26,7 @@ class UserClass {
             try {
                 response = await UserServices.addUser(user);
             } catch (e) {
+                console.log(e)
                 return res.status(400).send({error: "Duplicated Email address"});
             }
 
@@ -141,6 +143,26 @@ class UserClass {
             console.log({place: "userController, unfollow", e})
             res.status(500).send(e.message);
         }
+    }
+
+    feed: RequestHandler = async (req, res) => {
+        const skip: any = req.query.skip || 0;
+        const limit: any = req.query.limit || 10;
+
+        try {
+            const posts = await userServices.feed( parseInt(skip), parseInt(limit));
+            posts.sort((a: any, b: any) => {
+                const Atime = new Date(a.createdAt.toString()).getTime(),
+                    Btime = new Date(b.createdAt.toString()).getTime();
+                return Btime - Atime;
+            });
+            res.status(200).send(posts.slice(0, 10));
+
+        } catch (e) {
+            console.log({place: "userController, feed", e})
+            return res.status(500).send(e.message);
+        }
+        res.end()
     }
 }
 

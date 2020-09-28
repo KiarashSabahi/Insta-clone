@@ -45,6 +45,9 @@ userRouter.post("/follow", userAuth, userController.follow);
 //unfollow
 userRouter.post("/unfollow", userAuth, userController.unfollow);
 
+//Get Posts
+userRouter.get("/feedPosts", userAuth, userController.feed);
+
 
 
 

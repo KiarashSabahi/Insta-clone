@@ -35,13 +35,16 @@ const userSchema = new mongoose.Schema({
       required: true
     },
     posts: [{
-        type: Object
+        type: Object,
+        ref: "Post"
     }],
     followings: [{
-        type: Object
+        type: Object,
+        ref: "User"
     }],
     followers: [{
-        type: Object
+        type: Object,
+        ref: "User"
     }],
     tokens: [{
         token: {
